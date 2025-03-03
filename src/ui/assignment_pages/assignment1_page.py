@@ -7,7 +7,9 @@ from PyQt6.QtWidgets import (
     QHBoxLayout,
 )
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QPixmap
+from PyQt6.QtGui import QPixmap, QImage
+import cv2
+import numpy as np
 
 
 class Assignment1Page(QWidget):
@@ -102,14 +104,86 @@ class Assignment1Page(QWidget):
             )
             self.original_image_label.setPixmap(scaled_pixmap)
 
+            # Orijinal görüntüyü sınıf değişkeni olarak sakla
+            self.original_pixmap = pixmap
+
             # İşlem butonlarını aktif et
             self.grayscale_button.setEnabled(True)
             self.invert_button.setEnabled(True)
 
     def convert_to_grayscale(self):
-        # TODO: Implement grayscale conversion
-        pass
+        """
+        Orijinal görüntüyü gri tonlamalı hale dönüştürür.
+        """
+        if hasattr(self, "original_pixmap") and not self.original_pixmap.isNull():
+            # QPixmap'i QImage'e dönüştür
+            image = self.original_pixmap.toImage()
+
+            # QImage'i numpy dizisine dönüştür
+            width = image.width()
+            height = image.height()
+            ptr = image.constBits()
+            ptr.setsize(height * width * 4)  # 4 kanal (RGBA)
+            arr = np.frombuffer(ptr, np.uint8).reshape((height, width, 4))
+
+            # BGR formatına dönüştür (OpenCV için)
+            bgr_image = cv2.cvtColor(arr, cv2.COLOR_RGBA2BGR)
+
+            # Gri tonlamaya dönüştür
+            gray_image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2GRAY)
+
+            # Gri tonlamalı görüntüyü tekrar QImage'e dönüştür
+            h, w = gray_image.shape
+            bytes_per_line = w
+            q_image = QImage(
+                gray_image.data, w, h, bytes_per_line, QImage.Format.Format_Grayscale8
+            )
+
+            # QImage'i QPixmap'e dönüştür ve göster
+            processed_pixmap = QPixmap.fromImage(q_image)
+            scaled_pixmap = processed_pixmap.scaled(
+                300,
+                300,
+                Qt.AspectRatioMode.KeepAspectRatio,
+                Qt.TransformationMode.SmoothTransformation,
+            )
+            self.processed_image_label.setPixmap(scaled_pixmap)
 
     def invert_image(self):
-        # TODO: Implement image inversion
-        pass
+        """
+        Orijinal görüntünün negatifini alır.
+        """
+        if hasattr(self, "original_pixmap") and not self.original_pixmap.isNull():
+            # QPixmap'i QImage'e dönüştür
+            image = self.original_pixmap.toImage()
+
+            # QImage'i numpy dizisine dönüştür
+            width = image.width()
+            height = image.height()
+            ptr = image.constBits()
+            ptr.setsize(height * width * 4)  # 4 kanal (RGBA)
+            arr = np.frombuffer(ptr, np.uint8).reshape((height, width, 4))
+
+            # BGR formatına dönüştür (OpenCV için)
+            bgr_image = cv2.cvtColor(arr, cv2.COLOR_RGBA2BGR)
+
+            # Görüntüyü negatife çevir (255 - piksel değeri)
+            inverted_image = cv2.bitwise_not(bgr_image)
+
+            # Negatif görüntüyü tekrar QImage'e dönüştür
+            inverted_rgb = cv2.cvtColor(inverted_image, cv2.COLOR_BGR2RGB)
+            h, w, c = inverted_rgb.shape
+            bytes_per_line = c * w
+            q_image = QImage(
+                inverted_rgb.data, w, h, bytes_per_line, QImage.Format.Format_RGB888
+            )
+
+            # QImage'i QPixmap'e dönüştür ve göster
+            processed_pixmap = QPixmap.fromImage(q_image)
+            scaled_pixmap = processed_pixmap.scaled(
+                300,
+                300,
+                Qt.AspectRatioMode.KeepAspectRatio,
+                Qt.TransformationMode.SmoothTransformation,
+            )
+            self.processed_image_label.setPixmap(scaled_pixmap)
