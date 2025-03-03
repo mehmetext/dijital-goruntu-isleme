@@ -22,37 +22,29 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Dijital Görüntü İşleme")
         self.setGeometry(100, 100, 1024, 768)
 
-        # Create status bar
         self.statusBar().showMessage("Hazır")
 
-        # Create stacked widget for pages
         self.stacked_widget = QStackedWidget()
         self.setCentralWidget(self.stacked_widget)
 
-        # Create pages
         self.assignment1_page = Assignment1Page()
         self.home_page = self.create_home_page()
 
-        # Add pages to stacked widget
-        self.stacked_widget.addWidget(self.home_page)  # index 0
-        self.stacked_widget.addWidget(self.assignment1_page)  # index 1
+        self.stacked_widget.addWidget(self.home_page)
+        self.stacked_widget.addWidget(self.assignment1_page)
 
         self.initUI()
 
     def create_home_page(self):
-        # Create home page widget
         home_widget = QWidget()
         layout = QVBoxLayout(home_widget)
 
-        # Add top spacing for vertical centering
         layout.addStretch(1)
 
-        # Create header widget
         header_widget = QWidget()
         header_layout = QVBoxLayout(header_widget)
         header_layout.setSpacing(10)
 
-        # Course name label
         course_label = QLabel("Dijital Görüntü İşleme")
         course_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         course_font = QFont()
@@ -60,37 +52,29 @@ class MainWindow(QMainWindow):
         course_font.setBold(True)
         course_label.setFont(course_font)
 
-        # Student information label
         student_label = QLabel("231229084 - Mehmet KONUKÇU")
         student_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         student_font = QFont()
         student_font.setPointSize(16)
         student_label.setFont(student_font)
 
-        # Add labels to header layout
         header_layout.addWidget(course_label)
         header_layout.addWidget(student_label)
         header_layout.setContentsMargins(0, 0, 0, 0)
 
-        # Add header to main layout
         layout.addWidget(header_widget)
 
-        # Add bottom spacing for vertical centering
         layout.addStretch(1)
 
-        # Set the main layout margins
         layout.setContentsMargins(20, 20, 20, 20)
 
         return home_widget
 
     def initUI(self):
-        # Create menubar
         menubar = self.menuBar()
 
-        # Create File menu
         file_menu = menubar.addMenu("&Dosya")
 
-        # Add actions to File menu
         open_action = QAction("&Görüntü Aç...", self)
         open_action.setStatusTip("Bir görüntü dosyası açar")
 
@@ -105,19 +89,16 @@ class MainWindow(QMainWindow):
         file_menu.addSeparator()
         file_menu.addAction(exit_action)
 
-        # Create Help menu
         help_menu = menubar.addMenu("&Yardım")
         about_action = QAction("&Hakkında", self)
         about_action.setStatusTip("Uygulama hakkında bilgi gösterir")
         help_menu.addAction(about_action)
 
-        # Create toolbar for assignments
         toolbar = QToolBar("Ödevler")
         toolbar.setMovable(False)
         toolbar.setFloatable(False)
         self.addToolBar(Qt.ToolBarArea.TopToolBarArea, toolbar)
 
-        # Add home button
         home_action = QAction("Ana Sayfa", self)
         home_action.setStatusTip("Ana sayfaya dön")
         home_action.triggered.connect(lambda: self.stacked_widget.setCurrentIndex(0))
@@ -125,7 +106,6 @@ class MainWindow(QMainWindow):
 
         toolbar.addSeparator()
 
-        # Add assignment buttons to toolbar
         assignments = [
             ("Ödev &1", "Temel İşlevsellik", 1),
             ("Ödev &2", "Filtre Uygulama", None),
@@ -141,7 +121,5 @@ class MainWindow(QMainWindow):
                     )
                 )
             else:
-                action.setEnabled(
-                    False
-                )  # Henüz implement edilmemiş sayfaları devre dışı bırak
+                action.setEnabled(False)
             toolbar.addAction(action)
