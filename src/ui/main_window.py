@@ -129,8 +129,6 @@ class MainWindow(QMainWindow):
         assignments = [
             ("Ödev &1", "Temel İşlevsellik", 1),
             ("Ödev &2", "Filtre Uygulama", None),
-            ("Ödev &3", "Görüntü İyileştirme", None),
-            ("Ödev &4", "Morfolojik İşlemler", None),
         ]
 
         for number, description, page_index in assignments:

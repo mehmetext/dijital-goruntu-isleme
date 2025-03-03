@@ -40,9 +40,4 @@ Bu ödevde, Dijital Görüntü İşleme uygulamalarını geliştirmek için bir 
 ### Gereksinimler
 
 - Python 3.8+
-- PyQt5
-- Pillow (PIL)
-- NumPy
-- OpenCV
-
-**UYARI**: Verilen örnek kodların ve arabirimlerin daha gelişmiş versiyonlarını yazmanız beklenmektedir. Aynı kodları ödev olarak yükleyenlere puan verilmeyecektir.
+- PyQt6
