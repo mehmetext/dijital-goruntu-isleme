@@ -14,6 +14,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont, QAction, QIcon
 
 from .assignment_pages.assignment1_page import Assignment1Page
+from .assignment_pages.assignment2_page import Assignment2Page
 
 
 class MainWindow(QMainWindow):
@@ -28,10 +29,12 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.stacked_widget)
 
         self.assignment1_page = Assignment1Page()
+        self.assignment2_page = Assignment2Page()
         self.home_page = self.create_home_page()
 
         self.stacked_widget.addWidget(self.home_page)
         self.stacked_widget.addWidget(self.assignment1_page)
+        self.stacked_widget.addWidget(self.assignment2_page)
 
         self.initUI()
 
@@ -108,7 +111,7 @@ class MainWindow(QMainWindow):
 
         assignments = [
             ("Ödev &1", "Temel İşlevsellik", 1),
-            ("Ödev &2", "Filtre Uygulama", None),
+            ("Ödev &2", "Temel Görüntü Operasyonları", 2),
         ]
 
         for number, description, page_index in assignments:
