@@ -16,6 +16,7 @@ from PyQt6.QtGui import QFont, QAction, QIcon
 from .assignment_pages.assignment1_page import Assignment1Page
 from .assignment_pages.assignment2_page import Assignment2Page
 from .assignment_pages.assignment3_1_page import Assignment31Page
+from .assignment_pages.assignment3_2_page import Assignment32Page
 
 
 class MainWindow(QMainWindow):
@@ -32,12 +33,14 @@ class MainWindow(QMainWindow):
         self.assignment1_page = Assignment1Page()
         self.assignment2_page = Assignment2Page()
         self.assignment3_1_page = Assignment31Page()
+        self.assignment3_2_page = Assignment32Page()
         self.home_page = self.create_home_page()
 
         self.stacked_widget.addWidget(self.home_page)
         self.stacked_widget.addWidget(self.assignment1_page)
         self.stacked_widget.addWidget(self.assignment2_page)
         self.stacked_widget.addWidget(self.assignment3_1_page)
+        self.stacked_widget.addWidget(self.assignment3_2_page)
 
         self.initUI()
 
@@ -116,6 +119,7 @@ class MainWindow(QMainWindow):
             ("Ödev &1", "Temel İşlevsellik", 1),
             ("Ödev &2", "Temel Görüntü Operasyonları", 2),
             ("Ödev &3.1", "S-curve Kontrast Güçlendirme", 3),
+            ("Ödev &3.2", "Hough Transform ile Nesne Tespiti", 4),
         ]
 
         for number, description, page_index in assignments:
