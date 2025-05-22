@@ -18,6 +18,7 @@ from .assignment_pages.assignment2_page import Assignment2Page
 from .assignment_pages.assignment3_1_page import Assignment31Page
 from .assignment_pages.assignment3_2_page import Assignment32Page
 from .assignment_pages.assignment3_3_page import Assignment33Page
+from .assignment_pages.assignment3_4_page import Assignment34Page
 
 
 class MainWindow(QMainWindow):
@@ -36,6 +37,7 @@ class MainWindow(QMainWindow):
         self.assignment3_1_page = Assignment31Page()
         self.assignment3_2_page = Assignment32Page()
         self.assignment3_3_page = Assignment33Page()
+        self.assignment3_4_page = Assignment34Page()
         self.home_page = self.create_home_page()
 
         self.stacked_widget.addWidget(self.home_page)
@@ -44,6 +46,7 @@ class MainWindow(QMainWindow):
         self.stacked_widget.addWidget(self.assignment3_1_page)
         self.stacked_widget.addWidget(self.assignment3_2_page)
         self.stacked_widget.addWidget(self.assignment3_3_page)
+        self.stacked_widget.addWidget(self.assignment3_4_page)
 
         self.initUI()
 
@@ -124,6 +127,7 @@ class MainWindow(QMainWindow):
             ("Ödev &3.1", "S-curve Kontrast Güçlendirme", 3),
             ("Ödev &3.2", "Hough Transform ile Nesne Tespiti", 4),
             ("Ödev &3.3", "Deblurring Algoritması", 5),
+            ("Ödev &3.4", "Nesne Sayma ve Özellik Çıkarma", 6),
         ]
 
         for number, description, page_index in assignments:

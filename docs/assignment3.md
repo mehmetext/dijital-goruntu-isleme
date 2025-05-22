@@ -41,21 +41,3 @@ Bu ödevde, kontrast güçlendirme, Hough dönüşümü ile nesne tespiti, deblu
 | 2   | 386,896 | 48 px  | 12 px | 44 px    | 6,42   | 22,98   | 80   | 96     |
 
 - (Nesne sayma görseli buraya eklenecek)
-
-### Önemli Notlar
-
-- **Dış Kütüphane Kullanımı:** Görüntü işleme operasyonları için herhangi bir dış kütüphane kullanımı yasaktır.
-- **Detaylı Açıklamalar:** Her operasyon için adım adım açıklamalar rapora eklenecektir.
-- **Kod Organizasyonu:** Kodlar modüler ve okunabilir şekilde organize edilecektir.
-
-### Uygulama Yapısı
-
-- `main.py`: Ana uygulama dosyası
-- `ui/`: UI bileşenlerini içeren klasör
-  - `image_operations.py`: Görüntü işleme operasyonları
-  - `interpolation.py`: İnterpolasyon ve S-curve yöntemleri
-  - `hough.py`: Hough transform ve nesne tespiti
-  - `deblurring.py`: Deblurring algoritması
-  - `object_counting.py`: Nesne sayma ve özellik çıkarma
-- `utils/`: Yardımcı fonksiyonları içeren klasör
-- `assets/`: Görsel ve diğer kaynakları içeren klasör
